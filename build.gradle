@@ -30,3 +30,5 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+mainClassName="com.example.api.ApiApplication"

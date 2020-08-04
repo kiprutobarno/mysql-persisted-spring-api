@@ -20,7 +20,7 @@ public class ProductService {
         return repo.findAll();
     }
 
-    public void save(Product product) {
+    public void create(Product product) {
         repo.save(product);
     }
 

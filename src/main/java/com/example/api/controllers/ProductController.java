@@ -25,13 +25,24 @@ public class ProductController {
     ProductService service;
 
     @GetMapping("/products")
-    public Map<String, Object> list() {
+    public Map<String, Object> getProducts() {
         List<Product> products = service.listAll();
         HashMap<String, Object> map = new HashMap<>();
         ResponseEntity<?> response = ResponseEntity.ok(map);
         map.put("message", "OK");
         map.put("status", response.getStatusCodeValue());
         map.put("products", products);
+        return map;
+    }
+
+    @GetMapping("/products/{id}")
+    public Map<String, Object> getProduct(@PathVariable Integer id) {
+        Product product= service.getProduct(id);
+        HashMap<String, Object> map = new HashMap<>();
+        ResponseEntity<?> response = ResponseEntity.ok(map);
+        map.put("message", "OK");
+        map.put("status", response.getStatusCodeValue());
+        map.put("product", product);
         return map;
     }
 

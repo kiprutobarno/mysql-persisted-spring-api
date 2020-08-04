@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,19 @@ public class ProductController {
         HashMap<String, Object> map = new HashMap<>();
         ResponseEntity<?> response = ResponseEntity.status(HttpStatus.CREATED).body(map);
         map.put("message", "Created");
+        map.put("status", response.getStatusCodeValue());
+        return map;
+    }
+
+    @PutMapping("/products/{id}")
+    public Map<String, Object> updateProduct(@PathVariable Integer id, @RequestBody Product productDetails) {
+        Product product = service.getProduct(id);
+        product.setName(productDetails.getName());
+        product.setPrice(productDetails.getPrice());
+        service.create(product);
+        HashMap<String, Object> map = new HashMap<>();
+        ResponseEntity<?> response = ResponseEntity.ok(map);
+        map.put("message", "Updated");
         map.put("status", response.getStatusCodeValue());
         return map;
     }

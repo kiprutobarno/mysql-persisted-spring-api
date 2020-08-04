@@ -2,5 +2,13 @@ language: java
 jdk:
     - oraclejdk14
 
+services:
+    - mysql
+
 notifications:
     email: false
+
+before_install:
+    - mysql -e 'CREATE DATABASE api;'
+    - mysql -e 'UPDATE mysql.user SET Password=PASSWORD('admin123') WHERE User='root';'
+      

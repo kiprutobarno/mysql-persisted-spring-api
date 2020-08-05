@@ -26,7 +26,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public Map<String, Object> getProducts() {
-        List<Product> products = service.listAll();
+        List<Product> products = service.reads();
         HashMap<String, Object> map = new HashMap<>();
         ResponseEntity<?> response = ResponseEntity.ok(map);
         map.put("message", "OK");
@@ -37,7 +37,7 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public Map<String, Object> getProduct(@PathVariable Integer id) {
-        Product product= service.getProduct(id);
+        Product product = service.read(id);
         HashMap<String, Object> map = new HashMap<>();
         ResponseEntity<?> response = ResponseEntity.ok(map);
         map.put("message", "OK");
@@ -59,7 +59,7 @@ public class ProductController {
 
     @PutMapping("/products/{id}")
     public Map<String, Object> updateProduct(@PathVariable Integer id, @RequestBody Product productDetails) {
-        Product product = service.getProduct(id);
+        Product product = service.read(id);
         product.setName(productDetails.getName());
         product.setPrice(productDetails.getPrice());
         service.create(product);

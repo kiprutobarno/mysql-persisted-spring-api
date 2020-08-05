@@ -16,7 +16,7 @@ public class ProductService {
     @Autowired
     private ProductRepository repo;
 
-    public List<Product> listAll() {
+    public List<Product> reads() {
         return repo.findAll();
     }
 
@@ -24,7 +24,7 @@ public class ProductService {
         repo.save(product);
     }
 
-    public Product getProduct(Integer id) {
+    public Product read(Integer id) {
         return repo.findById(id).get();
     }
 
